@@ -30,7 +30,21 @@ app.use(express.static('public'))
 app.use(helmet())
 app.use(morgan('tiny')) // evertym we make req morgan Logs req in console
 
+//*Environments 
+// if we set like NODE_ENV=production in terminal 
+// and run nodemon indx.js it doesnt shows morgan in terminal on api req calls
 
+// console.log('NODE_ENV: ${process.env.NODE_ENV}');
+// console.log('app: ${app.get('env')}')
+
+if(app.get('env') === 'development'){
+    app.use(morgan('tiny'));
+    console.log("Using morgan...")
+}
+
+
+
+//*
 const courses = [{ id: 1, name: 'Mathematics' }, { id: 2, name: 'English' }, 
 { id: 3, name: 'Yoruba' }];
 
