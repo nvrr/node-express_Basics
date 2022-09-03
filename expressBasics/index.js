@@ -69,5 +69,16 @@ app.put('/api/courses/:id', (req, res) => {
     res.send(course);
 });
 
+
+app.delete('/api/courses/:id', (req, res) => {
+    var course = courses.find(c => {return c.id === parseInt(req.params.id)});
+
+    if (!course) return res.status(404).send('The course with the given ID was not found');
+const index = courses.indexOf(course)
+courses.splice(index,1)
+res.send(course)
+});
+
+
 const port = process.env.PORT || 3000;
 app.listen(port, ()=> console.log(`listening on ${port} port....`))
