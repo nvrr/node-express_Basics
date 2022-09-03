@@ -1,2 +1,9 @@
-i skip it,
+configuration: i skip it,
 and Debuggging also skipped /npm i debug use to control console logs
+
+Templating: i skip it, to send html markup to client we use them 
+like :PLUG,Mustache,ejs
+
+
+
+
