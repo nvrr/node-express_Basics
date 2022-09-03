@@ -29,16 +29,19 @@ app.get('/api/courses', (req,res)=>{
 
 app.post('/api/courses', (req, res) => {
    
-    const schema = Joi.object({
-        name: Joi.string().min(3).required()
-    });
+    // const schema = Joi.object({
+    //     name: Joi.string().min(3).required()
+    // });
 
-    const validity = schema.validate(req.body);
-    if(validity.error){
-        res.status(400).send(validity.error.details[0].message);
-        return;
-    }
+    // const validity = schema.validate(req.body);
+    // if(validity.error){
+    //     res.status(400).send(validity.error.details[0].message);
+    //     return;
+    // }
 
+    const {error} = validateCourse(req.body)
+    if(error) return res.status(400).send(error.details[0].message)
+ 
     const course = {
         id: courses.length + 1,
         name: req.body.name
@@ -55,15 +58,18 @@ app.put('/api/courses/:id', (req, res) => {
     };
 
     
-    const schema = Joi.object({
-        name: Joi.string().min(3).required()
-    });
+    // const schema = Joi.object({
+    //     name: Joi.string().min(3).required()
+    // });
 
-    const validity = schema.validate(req.body);
-    if(validity.error){
-        res.status(400).send(validity.error.details[0].message);
-        return;
-    }
+    // const validity = schema.validate(req.body);
+    // if(validity.error){
+    //     res.status(400).send(validity.error.details[0].message);
+    //     return;
+    // }
+
+    const {error} = validateCourse(req.body)
+    if(error) return res.status(400).send(error.details[0].message)
 
     course.name = req.body.name;
     res.send(course);
@@ -79,6 +85,14 @@ courses.splice(index,1)
 res.send(course)
 });
 
+
+function validateCourse(course){
+    const schema = Joi.object({
+        name: Joi.string().min(3).required()
+    });
+
+    return schema.validate(course)
+}
 
 const port = process.env.PORT || 3000;
 app.listen(port, ()=> console.log(`listening on ${port} port....`))
