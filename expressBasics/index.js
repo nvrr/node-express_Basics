@@ -1,9 +1,22 @@
 
 const Joi = require('joi')
+const logger = require('./logger');
 const express = require('express')
 const app = express()
 
+//* Middleware
 app.use(express.json());
+
+//cutome middlewares  -start
+
+app.use(logger)
+
+app.use(function(req,res,next){
+    console.log('Autenticaing...');
+    next() // use next if not ,everting stops here
+})
+
+//cutome middlewares  -end
 
 const courses = [{ id: 1, name: 'Mathematics' }, { id: 2, name: 'English' }, 
 { id: 3, name: 'Yoruba' }];
