@@ -18,6 +18,12 @@ app.use(function(req,res,next){
 
 //cutome middlewares  -end
 
+// Built-in Middleware wit tis we can pass arrays ,comples objects
+app.use(express.urlencoded({extended: true}))
+
+//* builtin middleware used to server static files
+
+
 const courses = [{ id: 1, name: 'Mathematics' }, { id: 2, name: 'English' }, 
 { id: 3, name: 'Yoruba' }];
 
