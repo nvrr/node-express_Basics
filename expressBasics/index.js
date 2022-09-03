@@ -1,4 +1,6 @@
 
+const morgan = require('morgan')
+const helmet = require('helmet ')
 const Joi = require('joi')
 const logger = require('./logger');
 const express = require('express')
@@ -22,6 +24,11 @@ app.use(function(req,res,next){
 app.use(express.urlencoded({extended: true}))
 
 //* builtin middleware used to server static files
+app.use(express.static('public')) 
+
+//* 3rd party middlewares
+app.use(helmet())
+app.use(morgan('tiny')) // evertym we make req morgan Logs req in console
 
 
 const courses = [{ id: 1, name: 'Mathematics' }, { id: 2, name: 'English' }, 
